@@ -1,7 +1,9 @@
 // Prevent script from running multiple times
-if (!window.hasRunCustomScript) {
+if (window.hasRunCustomScript) {
+    console.warn("⚠️ Script already loaded. Skipping duplicate execution.");
+} else {
     window.hasRunCustomScript = true;
-
+    
     document.addEventListener("DOMContentLoaded", function() {
         console.log("✅ Custom script loaded successfully.");
 
