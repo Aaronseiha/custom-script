@@ -5,14 +5,18 @@ if (!window.hasRunCustomScript) {
     document.addEventListener("DOMContentLoaded", function() {
         console.log("✅ Custom script loaded successfully.");
 
-        // 🚀 Ensure ClickFunnels isn't duplicating scripts
+        // 🚀 Prevent duplicate ClickFunnels script injections
         if (window.hasInitializedClickFunnelsFix) {
             console.warn("⚠️ ClickFunnels fix already applied. Skipping.");
             return;
         }
         window.hasInitializedClickFunnelsFix = true;
 
-        // Select form and submit button
+        // ✅ Prevent duplicate `originalFetch` declaration
+        if (!window.originalFetch) {
+            window.originalFetch = window.fetch;
+        }
+
         var form = document.querySelector("form");
         var submitButton = document.querySelector("#id-6Z-Zndk8k-597"); // Submit Button
         var targetSection = document.querySelector("#id-6Z-LPqMkm-209"); // Target Section
